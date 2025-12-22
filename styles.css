@@ -1,0 +1,870 @@
+/* ============================================
+   RESET E CONFIGURAÇÕES BÁSICAS
+   ============================================ */
+
+/* Remove margens e paddings padrão de todos os elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   VARIÁVEIS CSS (DESIGN TOKENS)
+   ============================================ */
+
+/* Define cores e valores reutilizáveis em todo o site */
+:root {
+  /* Cores do tema usando OKLCH para melhor controle de luminosidade */
+  --background: oklch(0.22 0.01 260); /* Fundo principal escuro */
+  --foreground: oklch(0.98 0.01 90); /* Texto principal branco */
+  --card: oklch(0.18 0.01 260); /* Fundo dos cards */
+  --card-foreground: oklch(0.95 0.01 90); /* Texto dos cards */
+  --primary: oklch(0.68 0.19 50); /* Cor laranja principal */
+  --primary-foreground: oklch(0.12 0.01 260); /* Texto em botões primários */
+  --secondary: oklch(0.35 0.01 260); /* Cor secundária cinza escuro */
+  --secondary-foreground: oklch(0.98 0.01 90); /* Texto em elementos secundários */
+  --muted: oklch(0.28 0.01 260); /* Cor suave para fundos */
+  --muted-foreground: oklch(0.65 0.01 260); /* Texto menos importante */
+  --border: oklch(0.32 0.01 260); /* Cor das bordas */
+
+  /* Outros valores */
+  --radius: 0.5rem; /* Raio padrão das bordas arredondadas */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Fonte do sistema */
+}
+
+/* ============================================
+   ESTILOS GLOBAIS
+   ============================================ */
+
+/* Ativa scroll suave ao clicar em links âncora */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos base do body com gradiente radial de fundo */
+body {
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  line-height: 1.6;
+  background: radial-gradient(ellipse at top, oklch(0.25 0.015 260), oklch(0.18 0.01 260));
+  min-height: 100vh;
+}
+
+/* Container centralizado com largura máxima */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================
+   HEADER E NAVEGAÇÃO
+   ============================================ */
+
+/* Header fixo no topo com efeito de blur */
+.header {
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+}
+
+/* Layout do menu de navegação */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo com ícone e texto */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 2.5rem;
+  overflow: hidden;
+}
+
+.logo-img {
+  height: 4rem;          /* aumenta só a imagem */
+  width: auto;
+  flex-shrink: 0;        /* impede a imagem de encolher */
+}
+
+.logo span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;        /* impede aumento vertical */
+}
+
+/* Links de navegação horizontal */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+/* Estilo dos links de navegação */
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+
+/* ============================================
+   DROPDOWN MENU (PRODUTOS)
+   ============================================ */
+
+/* Container do dropdown */
+.dropdown {
+  position: relative;
+}
+
+/* Botão que abre o dropdown */
+.dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Menu suspenso que aparece ao passar o mouse */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Mostra o dropdown ao passar o mouse */
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Links dentro do dropdown */
+.dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: var(--foreground);
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+/* Botão de menu mobile (oculto no desktop) */
+.mobile-menu-toggle {
+  display: none;
+}
+
+/* ============================================
+   SEÇÃO HERO (PÁGINA INICIAL)
+   ============================================ */
+
+/* Seção principal com gradiente e altura mínima */
+.hero {
+  background: linear-gradient(135deg, oklch(0.25 0.02 260) 0%, oklch(0.2 0.015 260) 50%, oklch(0.22 0.018 30) 100%);
+  color: var(--foreground);
+  padding: 6rem 0 8rem;
+  text-align: center;
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Container do conteúdo hero */
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Título principal grande */
+.hero-title {
+  font-size: 5.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+/* Subtítulo em laranja */
+.hero-subtitle {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+/* Descrição do hero */
+.hero-description {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  margin: 0 auto 2.5rem;
+  color: var(--muted-foreground);
+  max-width: 700px;
+}
+
+/* Container dos botões do hero */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   BOTÕES
+   ============================================ */
+
+/* Estilo base para todos os botões */
+.btn {
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* Botão primário laranja */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Botão secundário cinza */
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--muted);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   SETA ANIMADA DE SCROLL
+   ============================================ */
+
+/* Seta que indica scroll para baixo */
+.scroll-arrow {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--primary);
+  animation: bounce 2s infinite;
+  cursor: pointer;
+}
+
+.scroll-arrow svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Animação de bounce para a seta */
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* ============================================
+   SEÇÃO DE PRODUTOS
+   ============================================ */
+
+/* Container da seção de produtos */
+.products-section {
+  padding: 5rem 0;
+}
+
+/* Cabeçalho de seção */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: var(--muted-foreground);
+}
+
+/* Grid responsivo de produtos */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* Card individual de produto */
+.product-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Efeito hover no card */
+.product-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Container da imagem do produto */
+.product-image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background-color: var(--secondary);
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Zoom da imagem ao passar o mouse */
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+/* Conteúdo textual do produto */
+.product-content {
+  padding: 1.5rem;
+}
+
+/* Cabeçalho do produto com título e preço */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--card-foreground);
+  flex: 1;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.product-description {
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Box de especificações técnicas */
+.product-specs {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: var(--secondary);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+/* Item individual de especificação */
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.spec-item:last-child {
+  margin-bottom: 0;
+}
+
+.spec-label {
+  font-weight: 600;
+  color: var(--card-foreground);
+}
+
+.spec-value {
+  color: var(--muted-foreground);
+}
+
+/* Badges de cores disponíveis */
+.product-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.color-badge {
+  padding: 0.3rem 0.8rem;
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   SEÇÃO DE VÍDEO
+   ============================================ */
+
+/* Container da seção de vídeo do YouTube */
+.video-section {
+  padding: 5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+/* Wrapper do iframe do vídeo */
+.video-wrapper {
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+  border-radius: calc(var(--radius) + 4px);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Iframe responsivo 16:9 */
+.video-wrapper iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.video-description {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted-foreground);
+}
+
+/* ============================================
+   SEÇÃO DE DEPOIMENTOS
+   ============================================ */
+
+/* Container da seção de depoimentos */
+.testimonials-section {
+  padding: 5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+/* Grid de cards de depoimentos */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* Card individual de depoimento */
+.testimonial-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Cabeçalho do depoimento com avatar */
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Avatar circular com inicial */
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-right: 1rem;
+}
+
+.testimonial-info {
+  flex: 1;
+}
+
+.testimonial-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--card-foreground);
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-date {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+.testimonial-text {
+  color: var(--muted-foreground);
+  line-height: 1.8;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+/* Rodapé do site */
+.footer {
+  background-color: var(--card);
+  color: var(--foreground);
+  padding: 3rem 0 1.5rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+/* Grid com 3 colunas no footer */
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.footer-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+}
+
+.footer-description {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+/* Lista de links no footer */
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-list a {
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-list a:hover {
+  color: var(--primary);
+}
+
+/* Links de redes sociais no footer */
+.footer-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social-link:hover {
+  color: var(--primary);
+}
+
+.footer-social-link svg {
+  flex-shrink: 0;
+}
+
+/* Linha inferior do footer com copyright */
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+}
+
+/* ============================================
+   BOTÕES FLUTUANTES (WHATSAPP E INSTAGRAM)
+   ============================================ */
+
+/* Container dos botões fixos no canto inferior direito */
+.floating-buttons {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 1000;
+}
+
+/* Estilo base dos botões flutuantes */
+.floating-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Gradiente verde do WhatsApp */
+.whatsapp-btn {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+}
+
+/* Gradiente colorido do Instagram */
+.instagram-btn {
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #f77737 100%);
+}
+
+/* Efeito hover nos botões flutuantes */
+.floating-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   MEDIA QUERIES - RESPONSIVIDADE
+   ============================================ */
+
+/* Tablets (768px ou menos) */
+@media (max-width: 768px) {
+  .hero {
+    padding: 5rem 0 6rem;
+    min-height: 80vh;
+  }
+
+  .scroll-arrow {
+    bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 3rem;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .floating-buttons {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .floating-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Celulares (480px ou menos) */
+@media (max-width: 480px) {
+  /* Mostra o botão de menu hamburguer */
+  .mobile-menu-toggle {
+    display: block !important;
+    background: none;
+    border: none;
+    color: var(--foreground);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  /* Menu vertical mobile */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: oklch(0.15 0.01 260) !important;
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+    display: none;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Mostra o menu quando ativo */
+  .nav-links.active {
+    display: flex !important;
+  }
+
+  /* Estilo dos links no mobile */
+  .nav-links a {
+    display: block;
+    padding: 1rem 1.5rem !important;
+    color: white !important;
+    border-bottom: 1px solid oklch(0.25 0.01 260);
+  }
+
+  .nav-links a:hover {
+    background-color: oklch(0.2 0.01 260) !important;
+    color: var(--primary) !important;
+  }
+
+  /* Dropdown adaptado para mobile */
+  .dropdown-menu {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-color: oklch(0.12 0.01 260) !important;
+    box-shadow: none;
+    display: none;
+  }
+
+  .dropdown-menu.active {
+    display: block !important;
+  }
+
+  .dropdown-menu a {
+    padding-left: 2.5rem !important;
+    background-color: oklch(0.12 0.01 260) !important;
+    border-bottom: 1px solid oklch(0.2 0.01 260) !important;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  /* Hero menor no mobile */
+  .hero {
+    padding: 4rem 0 5rem;
+    min-height: 75vh;
+  }
+
+  .scroll-arrow {
+    bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 2rem;
+  }
+
+  .hero-description {
+    font-size: 1.05rem;
+  }
+
+  /* Botões empilhados verticalmente */
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  /* Grid de produtos em coluna única */
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
